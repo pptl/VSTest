@@ -4,8 +4,10 @@ import styled from "styled-components";
 import Icon from "Components/Icon";
 import backIcon from 'Assets/icon_back.png'
 import Title from "Components/Title";
-import { setShowJoinDialog, ClassItem } from "./classInfoSlice";
+import { setShowJoinDialog } from "./classInfoSlice";
 import CopyButton from "Components/copyButton";
+
+import AlignCenterContainer from "Components/alignCenterContainer";
 
 
 const DialogContant = styled.div`
@@ -19,11 +21,6 @@ const ReturnButton = styled.button`
   cursor: pointer;
   font-size:12px;
 `;
-
-const AlignCenterContainer = styled.div`
-  display: flex;
-  align-items: center;
-`
 
 const CopyBtnContainer = styled.div`
   display: flex;

@@ -1,7 +1,8 @@
 import { useAppSelector,useAppDispatch } from "Hooks/storeHooks"
-import { getClassList, setShowJoinDialog, ClassItem } from 'Module/classInfoModule/classInfoSlice'
+import { getClassList, setShowJoinDialog, ClassItem, getClassInfo } from 'Module/classInfoModule/classInfoSlice'
 import { useEffect } from "react";
 import JoinDialog from "Module/classInfoModule/joinDialog";
+import InfoDialog from "Module/classInfoModule/InfoDialog";
 
 import styled from 'styled-components';
 
@@ -56,6 +57,10 @@ function ClassList() {
     dispatch(setShowJoinDialog(item))
   }
 
+  const handleInfoClick = (id:string) => {
+    dispatch(getClassInfo(id))
+  }
+
   useEffect(()=>{
     dispatch(getClassList())
   },[dispatch])
@@ -68,12 +73,13 @@ function ClassList() {
           <ClassName>{item.className}</ClassName>
           <ButtonContainer>
             <JoinButton onClick={()=>{handleJoinClick(item)}}>Join</JoinButton>
-            <InfoButton>Info</InfoButton>
+            <InfoButton onClick={()=>{handleInfoClick(item.classId)}}>Info</InfoButton>
           </ButtonContainer>
         </ClassCard>
       ))}
    </ClassListContainer>
    <JoinDialog/>
+   <InfoDialog/>
    </>
   );
 }

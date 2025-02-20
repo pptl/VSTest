@@ -16,15 +16,16 @@ const DialogWrapper = styled.div`
 `;
 
 const DialogContent = styled.div`
-  background-color: white;
-  padding: 16px;
+  background-color:${({theme})=>theme.colors.lightGrey} ;
   margin: 0px;
   border-radius: 5px;
   width:80vw;
   height:90vw;
   min-height:450px;
   max-height: 740px;
-  max-width: 740px
+  max-width: 740px;
+  display: flex;
+  flex-direction: column;
 `;
 
 const CloseButton = styled.button`
@@ -42,11 +43,13 @@ const CloseButton = styled.button`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: end;
+  padding:16px 16px 0px 16px
 `;
 
 type dialogTypes = {
   show: boolean,
   handleDialogClose: Function,
+  backgroundColor?:string,
   children?: ReactNode,
 }
 

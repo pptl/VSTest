@@ -11,7 +11,7 @@ export type ClassItem = {
 
 type ClassList = ClassItem[] | null
 
-type Student = {
+export type Student = {
 	classNo: number,
 	name: string,
 	score: number
@@ -33,32 +33,30 @@ type ClassInfo = {
 
 type ClassInfoObject = { [classId: string]: ClassInfo }
 type ShowJoinDialog = ClassItem | boolean
+type ShowInfoDialog = ClassInfo | boolean
+
 
 export type ClassInfoState = {
 	classList: ClassList,
 	classListLoading: boolean,
-	classInfo: ClassInfo | null,
 	classInfoLoading: boolean,
 	showJoinDialog: ShowJoinDialog,
-	[key: string]: any;
+	showInfoDialog: ShowInfoDialog,
 }
 
+//loading 是爲了顯示spinner
 const initialState: ClassInfoState = {
 	classList: null,
 	classListLoading: false,
-	classInfo: null,
 	classInfoLoading: false,
 	showJoinDialog: false,
+	showInfoDialog: false,
 }
 
 const classInfoSlice = createSlice({
 	name: 'classInfo',
 	initialState: initialState,
 	reducers: {
-		setState: (state, action: PayloadAction<{ key: string, value: any }>) => {
-			const { key, value } = action.payload;
-			state[key] = value
-		},
 		getClassListStart: (state) => {
 			state.classListLoading = true
 		},
@@ -72,8 +70,7 @@ const classInfoSlice = createSlice({
 		getClassInfoStart: (state) => {
 			state.classInfoLoading = true
 		},
-		getClassInfoSuccess: (state, action: PayloadAction<ClassInfo>) => {
-			state.classInfo = action.payload
+		getClassInfoSuccess: (state) => {
 			state.classInfoLoading = false
 		},
 		getClassInfoFail: (state) => {
@@ -81,6 +78,9 @@ const classInfoSlice = createSlice({
 		},
 		setShowJoinDialog: (state, action: PayloadAction<ShowJoinDialog>) => {
 			state.showJoinDialog = action.payload
+		},
+		setShowInfoDialog: (state, action: PayloadAction<ShowInfoDialog>) => {
+			state.showInfoDialog = action.payload
 		},
 	}
 })
@@ -103,7 +103,10 @@ const getClassInfo = (id: string) => async (dispatch: AppDispatch) => {
 		dispatch(getClassInfoStart())
 		const response = await fetch('/src/mockData/classInfo.json');
 		const data: ClassInfoObject = await response.json();
-		dispatch(getClassInfoSuccess(data[id]));
+		dispatch(getClassInfoSuccess());
+		
+		//模擬只抓特定ID的Class Info Object
+		dispatch(setShowInfoDialog(data[id]))
 	} catch (error) {
 		dispatch(getClassInfoFail())
 		console.error(error);
@@ -111,7 +114,6 @@ const getClassInfo = (id: string) => async (dispatch: AppDispatch) => {
 }
 
 export const {
-	setState,
 	getClassListStart,
 	getClassListSuccess,
 	getClassListFail,
@@ -119,6 +121,7 @@ export const {
 	getClassInfoSuccess,
 	getClassInfoFail,
 	setShowJoinDialog,
+	setShowInfoDialog,
 } = classInfoSlice.actions
 export {
 	getClassList,
