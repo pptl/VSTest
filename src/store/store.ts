@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import classInfoReducer from 'Module/classListModule/ClassInfoSlice'
+import classInfoReducer from 'module/classInfoModule/classInfoSlice'
 export const store = configureStore({
    reducer: {
       classInfoReducer: classInfoReducer

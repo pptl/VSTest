@@ -4,21 +4,21 @@ const classList = [
         className: '301 Science',
         totalStudents: 16,
         classLink: 'https://www.classswift.viewsonic.io/',
-        qrCode: '',
+        qrCode: 'src/assets/qrCode.png',
     },
     {
         classId: 'X050SC2',
         className: '302 Science',
         totalStudents: 16,
         classLink: 'https://www.classswift.viewsonic.io/',
-        qrCode: '',
+        qrCode: 'src/assets/qrCode.png',
     },
     {
         classId: 'X050SC3',
         className: '303 Science',
         totalStudents: 16,
         classLink: 'https://www.classswift.viewsonic.io/',
-        qrCode: '',
+        qrCode: 'src/assets/qrCode.png',
     },
 ]
 

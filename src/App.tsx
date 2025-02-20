@@ -1,8 +1,8 @@
-import ClassList from "Module/classListModule/classList";
-function App() {
+import ClassList from "Module/classInfoModule/classList";
 
+const App = () => {
   return (
-  <ClassList/>
+    <ClassList/>
   );
 }
 
